@@ -110,7 +110,7 @@ func toXcode(grpcStatus *status.Status) Code {
 	}
 	return ServerErr
 }
-func CodeFormError(err error) XCode {
+func CodeFromError(err error) XCode {
 	err = errors.Cause(err)
 	if code, ok := err.(XCode); ok {
 		return code
