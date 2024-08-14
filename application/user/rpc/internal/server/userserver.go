@@ -6,9 +6,9 @@ package server
 import (
 	"context"
 
-	"beyond/application/user/rpc/internal/logic"
-	"beyond/application/user/rpc/internal/svc"
-	"beyond/application/user/rpc/pb/service"
+	"beyond-go/application/user/rpc/internal/logic"
+	"beyond-go/application/user/rpc/internal/svc"
+	"beyond-go/application/user/rpc/pb/service"
 )
 
 type UserServer struct {

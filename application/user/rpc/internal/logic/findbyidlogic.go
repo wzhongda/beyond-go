@@ -3,8 +3,8 @@ package logic
 import (
 	"context"
 
-	"beyond/application/user/rpc/internal/svc"
-	"beyond/application/user/rpc/pb/service"
+	"beyond-go/application/user/rpc/internal/svc"
+	"beyond-go/application/user/rpc/pb/service"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )

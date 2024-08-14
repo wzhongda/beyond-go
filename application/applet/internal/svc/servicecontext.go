@@ -1,7 +1,7 @@
 package svc
 
 import (
-	"beyond/application/applet/internal/config"
+	"beyond-go/application/applet/internal/config"
 )
 
 type ServiceContext struct {

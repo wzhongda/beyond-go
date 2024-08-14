@@ -3,8 +3,8 @@ package logic
 import (
 	"context"
 
-	"beyond/application/applet/internal/svc"
-	"beyond/application/applet/internal/types"
+	"beyond-go/application/applet/internal/svc"
+	"beyond-go/application/applet/internal/types"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )

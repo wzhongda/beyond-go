@@ -4,9 +4,9 @@ import (
 	"flag"
 	"fmt"
 
-	"beyond/application/applet/internal/config"
-	"beyond/application/applet/internal/handler"
-	"beyond/application/applet/internal/svc"
+	"beyond-go/application/applet/internal/config"
+	"beyond-go/application/applet/internal/handler"
+	"beyond-go/application/applet/internal/svc"
 
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/rest"

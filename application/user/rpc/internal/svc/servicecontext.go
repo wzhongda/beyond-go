@@ -1,6 +1,6 @@
 package svc
 
-import "beyond/application/user/rpc/internal/config"
+import "beyond-go/application/user/rpc/internal/config"
 
 type ServiceContext struct {
 	Config config.Config

@@ -1,7 +1,7 @@
 package xcode
 
 import (
-	"beyond/pkg/xcode/types"
+	"beyond-go/pkg/xcode/types"
 	"net/http"
 )
 

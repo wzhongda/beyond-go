@@ -6,7 +6,7 @@ package user
 import (
 	"context"
 
-	"beyond/application/user/rpc/pb/service"
+	"beyond-go/application/user/rpc/pb/service"
 
 	"github.com/zeromicro/go-zero/zrpc"
 	"google.golang.org/grpc"

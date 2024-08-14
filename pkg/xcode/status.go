@@ -1,7 +1,7 @@
 package xcode
 
 import (
-	"beyond/pkg/xcode/types"
+	"beyond-go/pkg/xcode/types"
 	"context"
 	"fmt"
 	"github.com/golang/protobuf/ptypes"
@@ -14,7 +14,7 @@ import (
 	"google.golang.org/protobuf/proto"
 )
 
-var _ XCode = (*Status).nil
+var _ XCode = (*Status)(nil)
 
 type Status struct {
 	sts *types.Status
@@ -105,7 +105,7 @@ func toXcode(grpcStatus *status.Status) Code {
 	case codes.Unavailable:
 		return ServiceUnavailable
 	case codes.Unknown:
-		return grpcStatus.Message()
+		return String(grpcStatus.Message())
 
 	}
 	return ServerErr
@@ -124,7 +124,7 @@ func CodeFormError(err error) XCode {
 	return ServerErr
 }
 func FromError(err error) *status.Status {
-	err = error.Cause(err)
+	err = errors.Cause(err)
 	if code, ok := err.(XCode); ok {
 		grpcStatus, e := gRPCStatusFromXCode(code)
 		if e == nil {
@@ -141,4 +141,33 @@ func FromError(err error) *status.Status {
 		grpcStatus, _ = status.FromError(err)
 	}
 	return grpcStatus
+}
+func gRPCStatusFromXCode(code XCode) (*status.Status, error) {
+	var sts *Status
+	switch v := code.(type) {
+	case *Status:
+		sts = v
+	case Code:
+		sts = FromCode(v)
+	default:
+		sts = Error(Code{code.Code(), code.Message()})
+		for _, detail := range code.Details() {
+			if msg, ok := detail.(proto.Message); ok {
+				_, _ = sts.WithDetails(msg)
+			}
+		}
+	}
+	stas := status.New(codes.Unknown, strconv.Itoa(sts.Code()))
+	return stas.WithDetails(sts.Proto())
+
+}
+func GrpcStatusToXCode(gstatus *status.Status) XCode {
+	details := gstatus.Details()
+	for i := len(details) - 1; i >= 0; i-- {
+		detail := details[i]
+		if pb, ok := detail.(proto.Message); ok {
+			return FromProto(pb)
+		}
+	}
+	return toXcode(gstatus)
 }

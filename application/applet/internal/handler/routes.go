@@ -4,7 +4,7 @@ package handler
 import (
 	"net/http"
 
-	"beyond/application/applet/internal/svc"
+	"beyond-go/application/applet/internal/svc"
 
 	"github.com/zeromicro/go-zero/rest"
 )
