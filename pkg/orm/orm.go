@@ -64,7 +64,7 @@ func NewMysql(conf *Config) (*DB, error) {
 	if conf.MaxLifetime == 0 {
 		conf.MaxLifetime = 3600
 	}
-	db, err := gorm.Open(mysql.Open(conf.DSN), &grom.Config{
+	db, err := gorm.Open(mysql.Open(conf.DSN), &gorm.Config{
 		Logger: &ormLog{},
 	})
 	if err != nil {
