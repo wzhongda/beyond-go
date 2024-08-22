@@ -5,3 +5,11 @@ Etcd:
   - 127.0.0.1:2379
   Key: user.rpc
 DataSource: root:Zsg123456@tcp(127.0.0.1:3306)/beyond_user?parseTime=true
+BizRedis:
+  Host: 127.0.0.1:6379
+  Pass:
+  Type: node
+CacheRedis:
+  - Host: 127.0.0.1:6379
+    Pass:
+    Type: node

@@ -1,7 +1,9 @@
 package logic
 
 import (
+	"beyond-go/application/user/rpc/user"
 	"context"
+	"encoding/json"
 
 	"beyond-go/application/applet/internal/svc"
 	"beyond-go/application/applet/internal/types"
@@ -24,7 +26,24 @@ func NewUserInfoLogic(ctx context.Context, svcCtx *svc.ServiceContext) *UserInfo
 }
 
 func (l *UserInfoLogic) UserInfo() (resp *types.UserInfoResponse, err error) {
-	// todo: add your logic here and delete this line
+	userId, err := l.ctx.Value(types.UserIdKey).(json.Number).Int64()
+	if err != nil {
+		return nil, err
+	}
+	if userId == 0 {
+		return &types.UserInfoResponse{}, nil
+	}
+	u, err := l.svcCtx.UserRPC.FindById(l.ctx, &user.FindByIdRequest{
+		UserId: userId,
+	})
+	if err != nil {
+		logx.Errorf("findbyid userId: %d error: %v", userId, err)
+	}
+	return &types.UserInfoResponse{
+		UserId:   u.UserId,
+		UserName: u.Username,
+		Avatar:   u.Avatar,
+	}, nil
 
 	return
 }

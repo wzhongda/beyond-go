@@ -24,7 +24,17 @@ func NewFindByMobileLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Find
 }
 
 func (l *FindByMobileLogic) FindByMobile(in *service.FindByMobileRequest) (*service.FindByMobileResponse, error) {
-	// todo: add your logic here and delete this line
-
-	return &service.FindByMobileResponse{}, nil
+	user, err := l.svcCtx.UserModel.FindByMobile(l.ctx, in.Mobile)
+	if err != nil {
+		logx.Errorf("findbymobile mobile: %s error:%v", in.Mobile, err)
+		return nil, err
+	}
+	if user == nil {
+		return &service.FindByMobileResponse{}, nil
+	}
+	return &service.FindByMobileResponse{
+		UserId:   int64(user.Id),
+		Username: user.Username,
+		Avatar:   user.Avatar,
+	}, nil
 }
