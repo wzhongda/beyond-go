@@ -1,0 +1,30 @@
+Name: article
+Host: 0.0.0.0
+Port: 8888
+Auth:
+  AccessSecret: xxx
+  AccessExpire: 604800
+  RefreshSecret: xx
+  RefreshExpire: 2592000
+  RefreshAfter: 604800
+Oss:
+  Endpoint: oss-cn-shanghai.aliyuncs.com
+  AccessKeyId: xxx
+  AccessKeySecret: xx
+  BucketName: beyond-article
+ArticleRPC:
+  Etcd:
+    Hosts:
+      - 127.0.0.1:2379
+    Key: article.rpc
+  NonBlock: true
+UserRPC:
+  Etcd:
+    Hosts:
+      - 127.0.0.1:2379
+    Key: user.rpc
+  NonBlock: true
+Prometheus:
+  Host: 0.0.0.0
+  Port: 9101
+  Path: /metrics
